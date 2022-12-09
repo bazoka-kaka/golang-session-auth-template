@@ -10,9 +10,9 @@ import (
 func main() {
 	// show pages
 	http.Handle("/", middlewares.RequireGET(http.HandlerFunc(controllers.ShowPage)))
-	http.Handle("/admin", middlewares.RequireGET(http.HandlerFunc(controllers.ShowPage)))
 	http.Handle("/register", middlewares.RequireGET(http.HandlerFunc(controllers.ShowPage)))
 	http.Handle("/login", middlewares.RequireGET(http.HandlerFunc(controllers.ShowPage)))
+	http.Handle("/admin", middlewares.Authenticate(middlewares.RequireGET(http.HandlerFunc(controllers.ShowPage))))
 
 	// handlers
 	http.Handle("/user/register", middlewares.RequirePOST(http.HandlerFunc(controllers.HandleRegister)))
